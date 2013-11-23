@@ -47,7 +47,10 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        if (joystick.getY() != 0) {
+	if (Math.abs(joystick.getY()) <0.05){
+            motor.set(-joystick.getY());
+	}
+        else {
             if (trigger.get()) {
                 if (!movedOffLimitSwitch) {
                     motor.set(-0.3);
@@ -61,8 +64,6 @@ public class RobotTemplate extends IterativeRobot {
                     }
                 }
             }
-        } else {
-            motor.set(-joystick.getY());
         }
         LCD.println(DriverStationLCD.Line.kUser1, 1, "lim value"+limit.get());
         LCD.println(DriverStationLCD.Line.kUser2, 1, "Joystick Y value: " + joystick.getY());
