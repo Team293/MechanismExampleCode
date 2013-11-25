@@ -4,7 +4,6 @@
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
-
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.DriverStationLCD;
@@ -22,52 +21,52 @@ import edu.wpi.first.wpilibj.RobotDrive;
  * directory.
  */
 public class Spike extends IterativeRobot {
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
 
-	Joystick leftJoystick = new Joystick(1);
-	Joystick rightJoystick = new Joystick(2);
-	Jaguar leftDrive = new Jaguar(1);
-	Jaguar rightDrive = new Jaguar(1);
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
+    Joystick leftJoystick = new Joystick(1);
+    Joystick rightJoystick = new Joystick(2);
+    Jaguar leftDrive = new Jaguar(1);
+    Jaguar rightDrive = new Jaguar(2);
 //	Encoder leftDriveEnc = new Encoder(1, 2);
 //	Encoder rightDriveEnc = new Encoder(1, 2);
-	DriverStationLCD out = DriverStationLCD.getInstance();
-	RobotDrive drive = new RobotDrive(leftDrive.getChannel(),
-			rightDrive.getChannel());
+    DriverStationLCD out = DriverStationLCD.getInstance();
+    RobotDrive drive = new RobotDrive(leftDrive,
+            rightDrive);
 
-	public void robotInit() {
-		// you always have to start and reset encoders
+    public void robotInit() {
+        // you always have to start and reset encoders
 //		leftDriveEnc.start();
 //		rightDriveEnc.start();
 //		leftDriveEnc.reset();
 //		rightDriveEnc.reset();
-		// just for safety
-		leftDrive.set(0);
-		rightDrive.set(0);
+        // just for safety
+        leftDrive.set(0);
+        rightDrive.set(0);
 
-	}
+    }
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
-	public void autonomousPeriodic() {
+    /**
+     * This function is called periodically during autonomous
+     */
+    public void autonomousPeriodic() {
+    }
 
-	}
-
-	/**
-	 * This function is called periodically during operator control
-	 */
-	public void teleopPeriodic() {
-		drive.tankDrive(leftJoystick.getY(), rightJoystick.getY());
-
+    /**
+     * This function is called periodically during operator control
+     */
+    public void teleopPeriodic() {
+        drive.tankDrive(leftJoystick.getY(), -rightJoystick.getY());
+        out.println(DriverStationLCD.Line.kUser1, 1, "leftJoy: " + leftJoystick.getY());
+        out.println(DriverStationLCD.Line.kUser2, 1, "rightJoy: " + rightJoystick.getY());
 //		out.println(DriverStationLCD.Line.kUser2, 1, "left drive: "
 //				+ leftDriveEnc.getRaw() + " " + leftDriveEnc.getDistance()
 //				+ " " + leftDriveEnc.getRate());
 //		out.println(DriverStationLCD.Line.kUser3, 1, "right drive: "
 //				+ rightDriveEnc.getRaw() + " " + rightDriveEnc.getDistance()
 //				+ " " + rightDriveEnc.getRate());
-		out.updateLCD(); // you need this in order for the display to update
-	}
+        out.updateLCD(); // you need this in order for the display to update
+    }
 }
