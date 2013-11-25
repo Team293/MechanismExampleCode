@@ -58,7 +58,7 @@ public class Spike extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        drive.tankDrive(leftJoystick.getY(), -rightJoystick.getY());
+        drive.tankDrive(leftJoystick.getY(), rightJoystick.getY());
         out.println(DriverStationLCD.Line.kUser1, 1, "leftJoy: " + leftJoystick.getY());
         out.println(DriverStationLCD.Line.kUser2, 1, "rightJoy: " + rightJoystick.getY());
 //		out.println(DriverStationLCD.Line.kUser2, 1, "left drive: "
