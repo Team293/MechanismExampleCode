@@ -3,3 +3,6 @@
 /ExampleAccelerometer/build/
 /ExampleServo/build/
 /ExampleEncoder/build/
+/ExampleAccelerometer/nbproject/private/
+/ExampleDriveTrain/nbproject/private/
+/ExampleEncoder/nbproject/private/
