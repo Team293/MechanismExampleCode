@@ -48,9 +48,9 @@ public class RobotTemplate extends IterativeRobot {
         double z=accZ.getAcceleration();
         double y=accY.getAcceleration();
         double x=accX.getAcceleration();
-        SmartDashboard.putNumber("z",z);
-        SmartDashboard.putNumber("y",y);
-        SmartDashboard.putNumber("x",x);
+        SmartDashboard.putNumber("z: ",z);
+        SmartDashboard.putNumber("y: ",y);
+        SmartDashboard.putNumber("x: ",x);
         
     }
 
