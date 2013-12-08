@@ -32,6 +32,7 @@ public class RobotTemplate extends IterativeRobot {
 
     public void robotInit() {
         gyro.reset();
+        //modify gyro
     }
 
     /**

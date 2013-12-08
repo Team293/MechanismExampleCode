@@ -2,4 +2,4 @@ ExampleGyro/nbproject/*
 ExampleGyro/resources/*
 ExampleGyro/BSD_License_fir_WPILib_code
 ExampleGyro/build.properties
-ExampleGyro/build
+ExampleGyro/build.xml
