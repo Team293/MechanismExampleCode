@@ -31,7 +31,7 @@ public class RobotTemplate extends IterativeRobot {
     JoystickButton reset = new JoystickButton(new Joystick(1), 1);
 
     public void robotInit() {
-        gyro.reset();
+        gyro.reset(); 
         //modify gyro
     }
 

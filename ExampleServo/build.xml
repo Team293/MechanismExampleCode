@@ -9,6 +9,7 @@
 
     If you do not have a Sun SPOT properties file for some reason,
     then you can set the sunspot.home property manually.
+    
 
         <property name="sunspot.home" value="/opt/sunspot"/>
 
