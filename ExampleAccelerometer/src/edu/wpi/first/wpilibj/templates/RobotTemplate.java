@@ -30,7 +30,7 @@ public class RobotTemplate extends IterativeRobot {
     Accelerometer accY = new Accelerometer(3);
     Accelerometer accX = new Accelerometer(4);
     DriverStationLCD LCD = DriverStationLCD.getInstance();
-    JoystickButton reset = new JoystickButton(new Joystick(1),1);
+    JoystickButton reset = new JoystickButton(new Joystick(1), 1);
 
     public void robotInit() {
     }
@@ -45,13 +45,14 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        double z=accZ.getAcceleration();
-        double y=accY.getAcceleration();
-        double x=accX.getAcceleration();
-        SmartDashboard.putNumber("z: ",z);
-        SmartDashboard.putNumber("y: ",y);
-        SmartDashboard.putNumber("x: ",x);
-        
+        double z = accZ.getAcceleration();
+        double y = accY.getAcceleration();
+        double x = accX.getAcceleration();
+
+        SmartDashboard.putNumber("x: ", x);
+        SmartDashboard.putNumber("y: ", y);
+        SmartDashboard.putNumber("z: ", z);
+
     }
 
     /**

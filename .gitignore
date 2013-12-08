@@ -1,8 +1,5 @@
-/ExampleSwingingArm/nbproject/private/
-/ExampleSpinningWheel/nbproject/private/
-/ExampleAccelerometer/build/
-/ExampleServo/build/
-/ExampleEncoder/build/
-/ExampleAccelerometer/nbproject/private/
-/ExampleDriveTrain/nbproject/private/
-/ExampleEncoder/nbproject/private/
+ExampleGyro/nbproject/*
+ExampleGyro/resources/*
+ExampleGyro/BSD_License_fir_WPILib_code
+ExampleGyro/build.properties
+ExampleGyro/build
