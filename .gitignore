@@ -1,5 +1,5 @@
-ExampleGyro/nbproject/*
-ExampleGyro/resources/*
-ExampleGyro/BSD_License_fir_WPILib_code
-ExampleGyro/build.properties
-ExampleGyro/build.xml
+*/nbproject/*
+*/resources/*
+*/BSD_License_fir_WPILib_code
+*/build.properties
+*/build.xml
