@@ -7,12 +7,12 @@
 
 package edu.wpi.first.wpilibj.templates;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.RobotDrive;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,30 +21,31 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Spike extends IterativeRobot {
+public class DriveTrain extends IterativeRobot {
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 
-	Jaguar jag = new Jaguar(1);
-	Encoder enc = new Encoder(1, 2);
-	Joystick joystick = new Joystick(1);
-	JoystickButton leftEnd = new JoystickButton(joystick, 3);
-	JoystickButton rightEnd = new JoystickButton(joystick, 4);
-	DigitalInput leftLimit = new DigitalInput(1);
-	DigitalInput rightLimit = new DigitalInput(2);
-	int state;
-	int prevState;
+	Joystick leftJoystick = new Joystick(1);
+	Joystick rightJoystick = new Joystick(2);
+	Jaguar leftDrive = new Jaguar(1);
+	Jaguar rightDrive = new Jaguar(1);
+//	Encoder leftDriveEnc = new Encoder(1, 2);
+//	Encoder rightDriveEnc = new Encoder(1, 2);
+	DriverStationLCD out = DriverStationLCD.getInstance();
+	RobotDrive drive = new RobotDrive(leftDrive.getChannel(),
+			rightDrive.getChannel());
 
 	public void robotInit() {
 		// you always have to start and reset encoders
-		enc.start();
-		enc.reset();
+//		leftDriveEnc.start();
+//		rightDriveEnc.start();
+//		leftDriveEnc.reset();
+//		rightDriveEnc.reset();
 		// just for safety
-		jag.set(0);
-		// init your state variables
-		state = 0;
+		leftDrive.set(0);
+		rightDrive.set(0);
 
 	}
 
@@ -59,32 +60,14 @@ public class Spike extends IterativeRobot {
 	 * This function is called periodically during operator control
 	 */
 	public void teleopPeriodic() {
-		if (leftEnd.get() || state == 1) {
-			state = 1;
-			if (!leftLimit.get()) {
-				jag.set(0.2);
-			} else {
-				jag.set(0); // make sure to stop it!!!
-				state = 0; // return to manual control
-			}
-		} else if (rightEnd.get() || state == 2) {
-			state = 2;
-			if (!rightLimit.get() || state == 3) {
-				jag.set(-0.2);
-			} else {
-				jag.set(0); // make sure to stop it!!!
-				state = 0; // return to manual control
-			}
-		} else {
-			double y = 0.0;
-			if (!leftLimit.get() && (y = joystick.getY()) > 0) {
-				jag.set(y);
-			} else if (!rightLimit.get() && (y = joystick.getY()) < 0) {
-				jag.set(y);
-			} else {
-				jag.set(0);// make sure to stop it!!!
-			}
-		}
-	}
+		drive.tankDrive(leftJoystick.getY(), rightJoystick.getY());
 
+//		out.println(DriverStationLCD.Line.kUser2, 1, "left drive: "
+//				+ leftDriveEnc.getRaw() + " " + leftDriveEnc.getDistance()
+//				+ " " + leftDriveEnc.getRate());
+//		out.println(DriverStationLCD.Line.kUser3, 1, "right drive: "
+//				+ rightDriveEnc.getRaw() + " " + rightDriveEnc.getDistance()
+//				+ " " + rightDriveEnc.getRate());
+		out.updateLCD(); // you need this in order for the display to update
+	}
 }
