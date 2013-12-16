@@ -6,7 +6,6 @@
 /*----------------------------------------------------------------------------*/
 package edu.wpi.first.wpilibj.templates;
 
-import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -48,7 +47,7 @@ public class ExampleGyro extends IterativeRobot {
             gyro.reset();
         }
         double angle = gyro.getAngle();
-        SmartDashboard.putNumber("angle: ", angle);
+        SmartDashboard.putNumber("gyro angle: ", angle);
     }
 
     /**
