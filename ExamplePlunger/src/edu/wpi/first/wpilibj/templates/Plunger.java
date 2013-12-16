@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.SpikeButton;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,9 +30,8 @@ public class Plunger extends IterativeRobot {
     Jaguar motor = new Jaguar(3);
     DigitalInput limit = new DigitalInput(4);
     Joystick joystick = new Joystick(1);
-    DriverStationLCD LCD = DriverStationLCD.getInstance();
-    JoystickButton trigger = new JoystickButton(joystick, 1);
-    boolean movedOffLimitSwitch = false, plunge = false;
+    SpikeButton fire = new SpikeButton(joystick, 1);
+    boolean movedOffLimitSwitch = false;
 
     public void robotInit() {
     }
@@ -50,10 +49,7 @@ public class Plunger extends IterativeRobot {
         if (Math.abs(joystick.getY()) > 0.05) {
             motor.set(-joystick.getY());
         } else {
-            if (trigger.get()) {
-                plunge = true;
-            }
-            if (plunge) {
+            if (fire.getState()) {
                 if (!movedOffLimitSwitch) {
                     if (limit.get()) {
                         motor.set(-1);
@@ -66,19 +62,11 @@ public class Plunger extends IterativeRobot {
                     } else {
                         motor.set(0.0);
                         movedOffLimitSwitch = false;
-                        plunge = false;
+                        fire.setState(false);
                     }
                 }
             }
         }
-
-        LCD.println(DriverStationLCD.Line.kUser1,
-                1, "lim value" + limit.get());
-        LCD.println(DriverStationLCD.Line.kUser2,
-                1, "Joystick Y value: " + joystick.getY());
-        LCD.println(DriverStationLCD.Line.kUser3,
-                1, "lim value" + movedOffLimitSwitch);
-        LCD.updateLCD();
     }
 
     /**
