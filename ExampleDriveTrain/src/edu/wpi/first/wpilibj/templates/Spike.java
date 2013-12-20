@@ -28,6 +28,7 @@ public class Spike extends IterativeRobot {
      */
     Joystick leftJoystick = new Joystick(1);
     Joystick rightJoystick = new Joystick(2);
+    Joystick gamepad = new Joystick(3);
     Jaguar leftDrive = new Jaguar(1);
     Jaguar rightDrive = new Jaguar(2);
     RobotDrive drive = new RobotDrive(leftDrive,
@@ -56,7 +57,15 @@ public class Spike extends IterativeRobot {
         } else {
             drive.tankDrive(leftJoystick.getY(), rightJoystick.getY());
         }
+
+        if (Math.abs(leftJoystick.getY()) < 0.1 && Math.abs(rightJoystick.getY()) < 0.1) {
+            drive.tankDrive(gamepad.getRawAxis(2), gamepad.getRawAxis(4));
+        }
         SmartDashboard.putNumber("leftJoy: ", leftJoystick.getY());
         SmartDashboard.putNumber("rightJoy: ", rightJoystick.getY());
+
+        SmartDashboard.putNumber("gamepad left Y: ", gamepad.getRawAxis(2));
+        SmartDashboard.putNumber("gamepad right y: ", gamepad.getRawAxis(4));
+
     }
 }
